@@ -1,0 +1,9 @@
+extends layout 
+block contenido
+    .contenido-principal
+        h1 #{PageName} - #{proyecto.nombre}
+        
+        //pre=vardump(proyecto)
+        .contenedor-acciones 
+            a(href=`/proyecto/editar/${proyecto.id}` class="boton") Editar Proyecto 
+            button#eliminar-proyecto(type="button" class="boton eliminar") Eliminar Proyecto
