@@ -1,0 +1,10 @@
+extends layout
+include mixins/crearProyecto 
+block contenido
+    .contenido-principal
+        h1 #{PageName}
+        //pre=vardump(proyecto)
+        if errores
+            each error in errores
+                .alerta(class="error")= error.texto
+        +crearProyecto(proyecto)  
