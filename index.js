@@ -9,6 +9,7 @@ const helpers = require('./helpers')
 
 //Crear conexion bd
 require('./models/Proyectos')
+require('./models/Tareas')
 bd.sync()
     .then(()=> console.log('Conectado a la bd'))
     .catch(err => console.log(err))
