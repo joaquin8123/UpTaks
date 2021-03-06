@@ -1,4 +1,5 @@
 const Proyecto = require('../models/Proyectos')
+const Tarea = require('../models/Tareas')
 const slug = require('slug')
 const proyectController = {}
 
@@ -40,7 +41,7 @@ proyectController.nuevoProyecto = async (req, res) =>{
       const proyecto = await Proyecto.update({nombre: nombre},{where: {id: req.params.id}})
       res.redirect('/')
    }
-   else if(!req.params.id){
+   else if(!req.params.id){  
       await Proyecto.create({nombre})
       res.redirect('/')
    }
@@ -54,10 +55,19 @@ proyectController.proyectoPorUrl = async (req, res,next) =>{
       }
    })
    const [proyectos,proyecto] = await Promise.all([proyectosPromise,proyectoPromise])
+   
+   const tareas = await Tarea.findAll({
+      where: {
+         proyectoId: proyecto.id
+      }
+   })
+   console.log(tareas)
    if(!proyecto) return next()
+   
    res.render('tareas',{
       PageName: 'Treas del Proyecto',
       proyecto,
+      tareas,
       proyectos
    })
 }
@@ -75,6 +85,12 @@ proyectController.formularioEditar = async (req, res,next) =>{
       proyecto
    })
 }
-
-
+proyectController.eliminarProyecto = async (req, res,next) =>{
+   const {urlProyecto} = req.query
+   const resultado = await Proyecto.destroy({where: {url: urlProyecto}})
+   if(!resultado){
+      return next();
+   }
+   res.status(200).send('Proyecto Eliminado Correctamente');
+}
 module.exports = proyectController
