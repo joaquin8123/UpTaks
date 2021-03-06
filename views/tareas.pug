@@ -2,8 +2,27 @@ extends layout
 block contenido
     .contenido-principal
         h1 #{PageName} - #{proyecto.nombre}
-        
-        //pre=vardump(proyecto)
+        form.agregar-tarea(action=`/proyectos/${proyecto.url}` method="POST")
+            .campo
+                label(for="tarea") Tarea:
+                input.nombre-tarea(type="text" name="tarea" placeholder="Nombre Tarea")
+            .campo.enviar 
+                input.boton.nueva-tarea(type="submit" value="Agregar")
+        .listado-pendientes
+            ul
+                if tareas.length 
+                    each tarea in tareas
+                        li.tarea#dataTarea(data-tarea=tarea.id)
+                            p= tarea.tarea
+                            .acciones
+                                if tarea.estado
+                                    i.far.fa-check-circle.completo
+                                else
+                                    i.far.fa-times-circle   
+                                i.fas.fa-trash
+                else
+                    p No hay tareas en este proyecto
+        //pre=vardump(tareas)
         .contenedor-acciones 
-            a(href=`/proyecto/editar/${proyecto.id}` class="boton") Editar Proyecto 
+            a#dataProyecto(data-proyecto=proyecto.url href=`/proyecto/editar/${proyecto.id}` class="boton") Editar Proyecto 
             button#eliminar-proyecto(type="button" class="boton eliminar") Eliminar Proyecto
