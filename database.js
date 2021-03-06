@@ -1,9 +1,11 @@
 const { Sequelize } = require('sequelize');
+const variablesEntorno = require('./env')
 
-const sequelize = new Sequelize('uptask', 'root', 'joaquin011096', {
-    host: '127.0.0.1',
+console.log(process.env.DB_PASSWORD)
+const sequelize = new Sequelize('uptask', variablesEntorno.DB_USER, variablesEntorno.DB_PASSWORD, {
+    host: variablesEntorno.DB_HOST,
     dialect: 'mysql',
-    port: 3306,
+    port: variablesEntorno.DB_PORT,
     operatorsAliases: false,
     define: {
         timestamps: false
