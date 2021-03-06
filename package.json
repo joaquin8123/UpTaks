@@ -4,21 +4,32 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon ./index.js"
+    "dev": "nodemon ./index.js",
+    "start": "concurrently \"npm run dev \" \"npm run watch \" ",
+    "watch": "webpack --watch --mode development"
   },
   "author": "Joaquin Suarez",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.21.1",
     "body-parser": "^1.19.0",
+    "bootstrap-icons": "^1.4.0",
+    "concurrently": "^6.0.0",
     "express": "^4.17.1",
     "express-validator": "^6.10.0",
     "mysql2": "^2.2.5",
     "pug": "^3.0.0",
     "sequelize": "^6.5.0",
     "shortid": "^2.2.16",
-    "slug": "^4.0.3"
+    "slug": "^4.0.3",
+    "sweetalert2": "^10.15.5"
   },
   "devDependencies": {
-    "nodemon": "^2.0.7"
+    "@babel/core": "^7.13.8",
+    "@babel/preset-env": "^7.13.8",
+    "babel-loader": "^8.2.2",
+    "nodemon": "^2.0.7",
+    "webpack": "^5.24.2",
+    "webpack-cli": "^4.5.0"
   }
 }
