@@ -23,6 +23,10 @@ block contenido
                 else
                     p No hay tareas en este proyecto
         //pre=vardump(tareas)
+        .avance
+            h2 Avance del Proyecto
+            #barra-avance.barra-avance
+                #porcentaje.porcentaje
         .contenedor-acciones 
             a#dataProyecto(data-proyecto=proyecto.url href=`/proyecto/editar/${proyecto.id}` class="boton") Editar Proyecto 
             button#eliminar-proyecto(type="button" class="boton eliminar") Eliminar Proyecto
