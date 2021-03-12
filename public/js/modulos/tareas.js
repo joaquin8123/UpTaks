@@ -1,11 +1,14 @@
 import Swal from 'sweetalert2';
 import axios from 'axios';
+import {actualizarAvance} from '../funciones/avance';
 const tareas = document.querySelector('.listado-pendientes')
 const dataTarea = document.getElementById('dataTarea');
 
 tareas.addEventListener('click', e =>{
-    if(e.target.classList.contains('fa-check-circle') || e.target.classList.contains('fa-times-circle')){
-        const id = dataTarea.dataset.tarea
+    if(e.target.classList.contains('fa-check-circle') || e.target.classList.contains('fa-times-circle')){ 
+        console.log('click icono')
+        const icono = e.target
+        const id = icono.parentElement.parentElement.dataset.tarea
         Swal.fire({
             title: 'Deseas cambiar de estado esta tarea?',
             //text: "Un proyecto eliminado no se puede recuperar",
@@ -40,7 +43,8 @@ tareas.addEventListener('click', e =>{
           })
     }
     if(e.target.classList.contains('fa-trash')){
-        const id = dataTarea.dataset.tarea
+        const icono = e.target
+        const id = icono.parentElement.parentElement.dataset.tarea
         Swal.fire({
             title: 'Deseas eliminar esta tarea?',
             //text: "Un proyecto eliminado no se puede recuperar",
