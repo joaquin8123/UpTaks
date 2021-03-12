@@ -1,18 +1,12 @@
 doctype html
 html(lang="en")
     head
-        meta(charset="UTF-8")
-        meta(http-equiv="X-UA-Compatible", content="IE=edge")
-        meta(name="viewport", content="width=device-width, initial-scale=1.0")
-        link(rel="stylesheet", href="/css/normalize.css")
-        link(rel="stylesheet", href="/css/app.css")
-        link(rel='stylesheet', href='https://use.fontawesome.com/releases/v5.7.2/css/all.css', integrity='sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr', crossorigin='anonymous')
-        title #{PageName}
+        include partials/header
     body
         header.barra
             h1 
                 a(href="/") UpTask - Administrador de Proyectos  #{year}
-            a(href="#") Cerrar Sesion
+            a(href="/cerrar-sesion") Cerrar Sesion
 
         main.contenedor 
             aside.contenedor-proyectos
