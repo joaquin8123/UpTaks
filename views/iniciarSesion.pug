@@ -5,9 +5,10 @@ html(lang="en")
     body.login
         .contenedor-formulario 
             h1 Iniciar Sesion 
-            
+            if mensaje
+                p.alerta.correcto= mensaje
             if error
-                p.alerta.error = error
+                p.alerta.error= error
             form#formulario-caja.caja-login(method="POST" action="/iniciar-sesion")
                 .campo
                     label(for="email") Email
@@ -17,6 +18,8 @@ html(lang="en")
                     input(type="password" name="password" placeholder="Ingresa tu contraseña" required)
                 .campo.enviar
                     input.boton(type="submit" value="Iniciar Sesion")
-                .campo
+                .campo.acciones
                     a(href="/crear-cuenta") Crea tu cuenta
+
+                    a(href="/reestablecer") Olvidaste tu contraseña?
         script(src="/dist/bundle.js")  
