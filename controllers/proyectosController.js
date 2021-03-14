@@ -5,7 +5,8 @@ const proyectController = {}
 
 
 proyectController.home = async(req, res) =>{
-   const proyectos = await Proyecto.findAll()
+   const usuarioId = res.locals.usuario.id
+   const proyectos = await Proyecto.findAll({where: {usuarioId }})
    res.render('index',{
     PageName: 'Proyectos',
     proyectos
@@ -15,7 +16,8 @@ proyectController.nosotros = (req, res) =>{
     res.render('nosotros')
  }
  proyectController.formularioProyecto = async (req, res) =>{
-   const proyectos = await Proyecto.findAll()
+   const usuarioId = res.locals.usuario.id
+   const proyectos = await Proyecto.findAll({where: {usuarioId }})
    res.render('nuevoProyecto',{
         PageName: 'Nuevo Proyecto',
         proyectos
@@ -25,7 +27,8 @@ proyectController.nosotros = (req, res) =>{
 
 proyectController.nuevoProyecto = async (req, res) =>{
    const {nombre} = req.body
-   const proyectos = await Proyecto.findAll()
+   const usuarioId = res.locals.usuario.id
+   const proyectos = await Proyecto.findAll({where: {usuarioId }})
    let errores = []
    if(!nombre){
       errores.push({'texto': 'Agrega un nombre al proyecto'})
@@ -42,13 +45,15 @@ proyectController.nuevoProyecto = async (req, res) =>{
       res.redirect('/')
    }
    else if(!req.params.id){  
-      await Proyecto.create({nombre})
+      const usuarioId = res.locals.usuario.id
+      await Proyecto.create({nombre,usuarioId})
       res.redirect('/')
    }
 } 
 
 proyectController.proyectoPorUrl = async (req, res,next) =>{
-   const proyectosPromise =  Proyecto.findAll()
+   const usuarioId = res.locals.usuario.id
+   const proyectosPromise =  Proyecto.findAll({where: {usuarioId }})
    const proyectoPromise =  Proyecto.findOne({
       where: {
          url: req.params.url
@@ -61,7 +66,6 @@ proyectController.proyectoPorUrl = async (req, res,next) =>{
          proyectoId: proyecto.id
       }
    })
-   console.log(tareas)
    if(!proyecto) return next()
    
    res.render('tareas',{
@@ -72,7 +76,8 @@ proyectController.proyectoPorUrl = async (req, res,next) =>{
    })
 }
 proyectController.formularioEditar = async (req, res,next) =>{
-   const proyectosPromise =  Proyecto.findAll()
+   const usuarioId = res.locals.usuario.id
+   const proyectosPromise =  Proyecto.findAll({where: {usuarioId }})
    const proyectoPromise =  Proyecto.findOne({
       where: {
          id: req.params.id
