@@ -1,10 +1,10 @@
 const { Sequelize } = require('sequelize');
-const variablesEntorno = require('./env')
+require('dotenv').config({path: './varibales.env'})
 
-const sequelize = new Sequelize('uptask', variablesEntorno.DB_USER, variablesEntorno.DB_PASSWORD, {
-    host: variablesEntorno.DB_HOST,
+const sequelize = new Sequelize('uptask', process.env.DB_USER, process.env.DB_PASSWORD, {
+    host: process.env.DB_HOST,
     dialect: 'mysql',
-    port: variablesEntorno.DB_PORT,
+    port: process.env.DB_PORT,
     operatorsAliases: false,
     define: {
         timestamps: false
