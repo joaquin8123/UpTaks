@@ -33,8 +33,13 @@ const Usuario = db.define('usuarios',{
                 msg: 'Agrega un password valido'
             }
          }
-    }
-
+    },
+    activo :{
+        type : Sequelize.INTEGER,
+        defaultValue: 0
+    },
+    token: Sequelize.STRING,
+    expiracion: Sequelize.DATE
 }, {
     hooks: {
         beforeCreate(usuario){
@@ -45,6 +50,6 @@ const Usuario = db.define('usuarios',{
 Usuario.prototype.verificarPassword = function(password){
     return bcrypt.compareSync(password,this.password)
 }
-//Usuario.hasMany(Proyectos)
+Usuario.hasMany(Proyectos)
 
 module.exports = Usuario
