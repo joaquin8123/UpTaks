@@ -245,20 +245,20 @@ body.index {
     text-transform: uppercase;
 }
 .error {
-    color: rgb(163, 160, 160)!important;
+    color: red!important;
     background-color: rgb(255, 201, 201);
     border: 1px solid red;
 }
 .error p {
-    color: red!important;
+    color: rgb(248, 244, 244)!important;
 }
 .correcto {
-    color: green;
-    background-color: rgb(201, 245, 201);
-    border: 1px solid green;
+    color: rgb(86, 235, 94);
+    background-color: rgb(94, 233, 94);
+    border: 1px solid green
 }
 .correcto p {
-    color: green;
+    color: rgb(228, 236, 228);
 }
 
 /** Linea de Avance **/
