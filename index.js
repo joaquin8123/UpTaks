@@ -8,6 +8,8 @@ const helpers = require('./helpers')
 const flash = require('connect-flash')
 const session = require('express-session');
 const passport = require('./passport');
+const cookieParser = require('cookie-parser');
+require('dotenv').config({path: './varibales.env'})
 
 
 //Crear conexion bd
@@ -29,15 +31,11 @@ app.use(express.static('public'))
 app.set('view engine','pug')
 //add folder views
 app.set('views', path.join(__dirname, './views'))
+app.use(cookieParser());
 //add flash messages
 app.use(flash())
 
-app.use((req,res,next) => {
-    res.locals.year = new Date().getFullYear()
-    res.locals.vardump = helpers.vardump
-    
-    next()
-})
+
 
 //sesiones para navegar en distintas paginas son volvernos a autenticar
 app.use(session({
@@ -49,6 +47,13 @@ app.use(session({
 app.use(passport.initialize())
 app.use(passport.session())
 
+app.use((req,res,next) => {
+    console.log(req.user)
+    res.locals.year = new Date().getFullYear()
+    res.locals.vardump = helpers.vardump
+    res.locals.usuario = {...req.user || null}
+    next()
+})
 //Routes
 app.use(routes)
 
@@ -56,5 +61,6 @@ app.use(routes)
 app.use((req, res, next) => {
     next()
 })
-
-app.listen(3000, () => console.log('Servidor corriendo en el puerto 3000'))
+const host = process.env.HOST || '0.0.0.0'
+const port = process.env.PORT || 3000
+app.listen(port, () => console.log('Servidor corriendo en el puerto 3000'))
